@@ -1,0 +1,11 @@
+version: '3.7'
+
+services:
+  todo:
+    image: maissenayed/todolist
+    container_name: todo
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - ${REACT_LISTEN_PORT:-3000}:3000

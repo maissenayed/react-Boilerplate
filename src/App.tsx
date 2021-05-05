@@ -1,30 +1,18 @@
-import React from "react";
-import logo from "./logo.svg";
-import "./App.css";
-import { Provider } from "react-redux";
-import configureStore from "./state";
+import React from 'react'
+import { Switch } from 'react-router-dom'
 
-const initialState = (window as any).initialReduxState;
-const store = configureStore(initialState);
+import Authentication from './components/Authentication/Authentication'
+import PrivateRoute from './shared/widgets/PrivateRoute'
+import PublicRoute from './shared/widgets/PublicRoute'
+import AppLayout from './shared/layout/Layout'
 
 const App = () => {
   return (
-    <Provider store={store}>
-      {
-        <div className="App">
-          <header className="App-header">
-            <img src={logo} className="App-logo" alt="logo" />
-            <p>
-              Edit <code>src/App.tsx</code> and save to reload.
-            </p>
-            <a className="App-link" href="https://reactjs.org" target="_blank" rel="noopener noreferrer">
-              Learn React
-            </a>
-          </header>
-        </div>
-      }
-    </Provider>
-  );
-};
+    <Switch>
+      <PublicRoute path="/auth" component={Authentication} />
+      <PrivateRoute component={AppLayout} />
+    </Switch>
+  )
+}
 
-export default App;
+export default App
