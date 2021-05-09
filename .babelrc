@@ -1,45 +1,17 @@
 {
-  "presets": [["@babel/preset-env", { "useBuiltIns": "entry" }], "@babel/preset-react", "@babel/preset-typescript"],
+  "presets": ["@babel/preset-env", "@babel/preset-react"],
   "plugins": [
-
     [
-      "babel-plugin-import",
-      {
-        "libraryName": "@material-ui/core",
-        "libraryDirectory": "esm",
-        "camel2DashComponentName": false
-      },
-      "core"
-    ],
-    [
-      "babel-plugin-import",
-      {
-        "libraryName": "@material-ui/icons",
-        "libraryDirectory": "esm",
-        "camel2DashComponentName": false
-      },
-      "icons"
-    ],
-    [
+      // babel-plugin-import for antd components
+      // This plugin modifies the imports done in this way
+      // import { Select } from 'antd'
+      // To only import the relevant component and styles, not the whole library
       "import",
       {
         "libraryName": "antd",
-        "libraryDirectory": "lib"
-      },
-      "antd"
-    ],
-    [
-      "import",
-      {
-        "libraryName": "@ant-design/icons",
-        "libraryDirectory": "es/icons",
-        "camel2DashComponentName": false
-      },
-      "@ant-design/icons"
-    ],
-    ["module-resolver", { "root": ["./src"] }],
-    ["@babel/plugin-transform-runtime", { "runtimeHelpers": true }],
-    "react-hot-loader/babel",
-    "transform-class-properties"
+        "libraryDirectory": "es",
+        "style": true
+      }
+    ]
   ]
 }

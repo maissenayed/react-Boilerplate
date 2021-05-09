@@ -28,7 +28,7 @@ module.exports = {
   rules: {
     'consistent-return': 'off',
     'no-shadow': 'off',
-    ' @typescript-eslint/no-shadow': 'off',
+    '@typescript-eslint/no-shadow': 'off',
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     'no-param-reassign': 'off',
     'no-plusplus': 'off',
@@ -37,11 +37,8 @@ module.exports = {
     'no-nested-ternary': 'off',
     'no-console': 'off',
     'no-use-before-define': 'off',
-    'prettier/prettier': [
-      'error',
-      {
-        endOfLine: 'auto',
-      },
-    ],
+    semi: 'off',
+    '@typescript-eslint/comma-dangle': 'off',
+    '@typescript-eslint/semi': 'off',
   },
 }

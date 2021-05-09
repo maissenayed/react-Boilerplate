@@ -39,15 +39,8 @@ const toDoListSlice = createSlice({
         // This object is still wrapped in a Proxy, so we can "mutate" it
       }
     },
-    changeStatus(state, action) {},
   },
 })
 
 export const toDoListReducer = toDoListSlice.reducer
-export const {
-  updateTodo,
-  create,
-  loader,
-  remove,
-  changeStatus,
-} = toDoListSlice.actions
+export const { updateTodo, create, loader, remove } = toDoListSlice.actions
