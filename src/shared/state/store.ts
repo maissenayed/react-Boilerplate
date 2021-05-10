@@ -1,6 +1,12 @@
-import { configureStore } from '@reduxjs/toolkit'
+import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit'
+import { routerMiddleware } from 'connected-react-router'
+import reduxSaga from 'redux-saga'
+import { takeLatest } from 'redux-saga/effects'
+import * as effects from 'redux-saga/effects'
 
+import history from '../utils/history'
 import reducer from './reducer/rootReducer.reducer'
+import { hardCodedUser, login } from './slices/authentication.slice'
 
 // Mocking Up a small backend ,
 // by saving our redux store into the local storage to mock auth session and getting data from db
@@ -24,9 +30,39 @@ export const saveState = (state: TStore) => {
   }
 }
 
-const persistedStore = loadState()
+function* saveInfoSaga(_: typeof login) {
+  try {
+    yield console.log('yo')
+  } catch (error) {
+    console.log(error)
+  }
+}
+const sagaMiddleware = reduxSaga()
 
-export const store = configureStore({ reducer, preloadedState: persistedStore })
+const persistedStore = loadState()
+export function* saga() {
+  yield effects.all([takeLatest(login.type, saveInfoSaga)])
+}
+
+function* initSaga() {
+  yield effects.all([effects.fork(saga), effects.put(login(hardCodedUser))])
+}
+
+function* rootSaga() {
+  yield effects.fork(initSaga)
+}
+
+export const store = configureStore({
+  reducer,
+  preloadedState: persistedStore,
+  middleware: [
+    ...getDefaultMiddleware({ thunk: false }),
+    routerMiddleware(history),
+    sagaMiddleware,
+  ],
+  devTools: process.env.NODE_ENV !== 'production',
+})
+sagaMiddleware.run(rootSaga)
 
 export type TStore = ReturnType<typeof store.getState>
 
