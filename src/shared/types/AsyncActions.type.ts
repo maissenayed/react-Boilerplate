@@ -7,7 +7,7 @@ export enum AsyncActionStatus {
 }
 
 // app/actions/asyncAction.ts
-interface LoadingAsyncAction<T> {
+export interface LoadingAsyncAction<T> {
   type: T
   status: AsyncActionStatus.LOADING
 }

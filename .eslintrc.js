@@ -40,5 +40,10 @@ module.exports = {
     semi: 'off',
     '@typescript-eslint/comma-dangle': 'off',
     '@typescript-eslint/semi': 'off',
+    'react/destructuring-assignment': 'off',
+    'react/no-access-state-in-setstate': 'off',
+    '@typescript-eslint/no-explicit-any': 'off',
+    'react-hooks/rules-of-hooks': 'off',
+    '@typescript-eslint/ban-ts-comment': 'off',
   },
 }

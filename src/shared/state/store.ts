@@ -6,7 +6,7 @@ import * as effects from 'redux-saga/effects'
 
 import history from '../utils/history'
 import reducer from './reducer/rootReducer.reducer'
-import { hardCodedUser, login } from './slices/authentication.slice'
+import { login, logout } from './slices/authentication.slice'
 
 // Mocking Up a small backend ,
 // by saving our redux store into the local storage to mock auth session and getting data from db
@@ -30,11 +30,11 @@ export const saveState = (state: TStore) => {
   }
 }
 
-function* saveInfoSaga(_: typeof login) {
+function* saveInfoSaga() {
   try {
-    yield console.log('yo')
+    yield console.log('')
   } catch (error) {
-    console.log(error)
+    console.error(error)
   }
 }
 const sagaMiddleware = reduxSaga()
@@ -45,7 +45,7 @@ export function* saga() {
 }
 
 function* initSaga() {
-  yield effects.all([effects.fork(saga), effects.put(login(hardCodedUser))])
+  yield effects.all([effects.fork(saga)])
 }
 
 function* rootSaga() {

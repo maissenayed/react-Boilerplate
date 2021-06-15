@@ -19,7 +19,7 @@ const Header = () => {
     <Layout.Header>
       <Row justify="space-between" align="middle">
         <Col>
-          <TitleHeader>To do list</TitleHeader>
+          <TitleHeader>Step up you javascript</TitleHeader>
         </Col>
         <Col>
           <Row justify="space-between" align="middle" gutter={[16, 16]}>

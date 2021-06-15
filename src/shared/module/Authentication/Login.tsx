@@ -4,11 +4,8 @@ import * as React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components'
 
-import {
-  hardCodedUser,
-  login,
-} from '../../shared/state/slices/authentication.slice'
-import { TStore } from '../../shared/state/store'
+import { hardCodedUser, login } from '../../state/slices/authentication.slice'
+import { TStore } from '../../state/store'
 
 const LoginHeader = styled(Typography.Title)`
   margin: 30px auto !important;
@@ -17,7 +14,9 @@ const LoginCard = styled(Card)``
 
 const LoginComponent = () => {
   const [errorLogIn, setErrorLogIn] = React.useState(false)
+
   const dispatch = useDispatch()
+
   const onFinish = (values: { email: string; password: string }) => {
     dispatch(login({ email: values.email, password: values.password }))
   }
@@ -25,13 +24,19 @@ const LoginComponent = () => {
   const { email, password } = useSelector(
     (state: TStore) => state.authenticationReducer
   )
+  console.log(email, password)
+
   React.useEffect(() => {
     const notInitialValue = email !== '' && password !== ''
+
     const hardCodedValue =
       email !== hardCodedUser.email && password !== hardCodedUser.password
+
     const errorLogic = notInitialValue && hardCodedValue
+
     setErrorLogIn(errorLogic)
   }, [email, password])
+
   return (
     <LoginCard>
       <Row justify="center">
